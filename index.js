@@ -4,7 +4,7 @@ const User = require('./db/user')
 const Admin = require('./db/admin')
 const Notification = require('./db/Notification')
 require('./db/config');
-const Port =  process.env.PORT || 5000;
+const port =  process.env.PORT || 5000;
 
 const app = express();
 
@@ -173,4 +173,4 @@ app.get('/admin-profile', async (req, resp) => {
     }
 });
 
-app.listen(Port);
+app.listen(port);
