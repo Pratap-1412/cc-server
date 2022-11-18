@@ -173,4 +173,37 @@ app.get('/admin-profile', async (req, resp) => {
     }
 });
 
+app.get('/userslist', async (req, resp) => {
+    let user = await User.find();
+    if (user.length > 0) {
+        resp.send(user);
+    }
+    else {
+        resp.send({ result: "No Product Found" });
+    }
+});
+
+app.delete('/userslist/:id', async (req, resp) => {
+    let user = await User.deleteOne({ _id: req.params.id });
+    if (user) {
+        resp.send(user);
+    }
+    else {
+        resp.send({ user: "Please enter valid data." })
+    }
+});
+
+app.put('/userslist/:id', async (req, resp) => {
+    const result = await User.updateOne(
+        { _id: req.params.id },
+        { $set: req.body }
+    );
+    if (result) {
+        resp.send(result);
+    }
+    else {
+        resp.send({ result: "No data found !!!" })
+    }
+});
+
 app.listen(port);
